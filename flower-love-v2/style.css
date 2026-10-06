@@ -1,0 +1,160 @@
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{
+  background:#020209;color:#fff;font-family:"Courier New",monospace;
+  position:relative;
+}
+body:before{
+  content:"";position:fixed;inset:0;z-index:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,.22) 1px,transparent 1.5px);
+  background-size:17px 17px;opacity:.42;
+}
+body:after{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(circle at 50% 70%,rgba(255,30,190,.10),transparent 35%),
+             radial-gradient(circle at 50% 100%,rgba(20,255,80,.09),transparent 38%);
+}
+.screen{
+  position:absolute;inset:0;z-index:2;display:flex;justify-content:center;
+  transition:opacity 1.1s ease,transform 1.1s ease;
+}
+.screen:not(.active){opacity:0;pointer-events:none;transform:scale(1.06)}
+#intro{align-items:center}
+.intro-box{text-align:center;margin-top:-5vh}
+#typing{
+  min-height:55px;font-size:clamp(24px,5vw,52px);font-weight:bold;
+  letter-spacing:.22em;text-shadow:0 0 6px #fff,0 0 20px #fff,0 0 40px #d9caff;
+  animation:flicker 3s infinite;
+}
+#openBtn{
+  margin:38px auto 0;padding:13px 31px;border-radius:50px;
+  color:white;background:rgba(25,25,50,.65);border:1px solid #ddd;
+  font:16px "Courier New",monospace;cursor:pointer;
+  box-shadow:0 0 10px #fff5,0 0 25px #e9bfff3a;
+  transition:.3s;
+}
+#openBtn:hover{transform:scale(1.1);box-shadow:0 0 15px #fff,0 0 40px #ff6cdb}
+#openBtn span{color:#ffe96a;text-shadow:0 0 12px #ffe96a}
+
+#garden{padding-top:6vh;overflow:hidden;align-items:flex-start}
+.top-title{
+  position:absolute;top:6vh;left:0;right:0;text-align:center;
+  min-height:50px;font-size:clamp(22px,4.5vw,48px);font-weight:bold;
+  letter-spacing:.13em;text-shadow:0 0 7px white,0 0 18px #fff,0 0 45px #ff43cf;
+}
+.subtitle{
+  position:absolute;top:13.5vh;left:0;right:0;text-align:center;
+  font-size:clamp(10px,2vw,15px);letter-spacing:.25em;color:#ffd5f2;
+  opacity:0;transition:1s;
+}
+.subtitle.show{opacity:.8}
+
+.garden{
+  position:absolute;left:0;right:0;bottom:0;height:67vh;min-height:390px;
+}
+.ground-glow{
+  position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+  width:80%;height:25%;background:radial-gradient(ellipse,rgba(60,255,90,.16),transparent 65%);
+  filter:blur(8px);
+}
+
+.flower{
+  position:absolute;bottom:-2px;width:85px;height:78%;transform-origin:bottom;
+  transform:scaleY(0);animation:none;
+}
+.flower.grow{animation:grow .9s cubic-bezier(.2,.8,.2,1) forwards,sway 4s 1s ease-in-out infinite}
+.stem{
+  position:absolute;bottom:0;left:50%;width:8px;height:73%;transform:translateX(-50%);
+  border-radius:20px;background:linear-gradient(90deg,#139b28,#7dff69,#15952a);
+  box-shadow:0 0 9px #45ff55aa;
+}
+.leaf{
+  position:absolute;width:31px;height:15px;border-radius:100% 0 100% 0;
+  background:linear-gradient(135deg,#9aff76,#15a92d);box-shadow:0 0 8px #45ff5555;
+}
+.leaf-a{left:2px;bottom:31%;transform:rotate(18deg)}
+.leaf-b{right:1px;bottom:47%;transform:rotate(162deg)}
+
+.head{
+  position:absolute;left:50%;top:0;width:82px;height:82px;transform:translateX(-50%);
+}
+.head.big{width:105px;height:105px}
+.head i{
+  position:absolute;left:50%;top:50%;width:30px;height:53px;
+  transform-origin:50% 100%;border-radius:55%;
+}
+.head.big i{width:36px;height:65px}
+.head i:nth-child(1){transform:translate(-50%,-100%) rotate(0)}
+.head i:nth-child(2){transform:translate(-50%,-100%) rotate(45deg)}
+.head i:nth-child(3){transform:translate(-50%,-100%) rotate(90deg)}
+.head i:nth-child(4){transform:translate(-50%,-100%) rotate(135deg)}
+.head i:nth-child(5){transform:translate(-50%,-100%) rotate(180deg)}
+.head i:nth-child(6){transform:translate(-50%,-100%) rotate(225deg)}
+.head i:nth-child(7){transform:translate(-50%,-100%) rotate(270deg)}
+.head i:nth-child(8){transform:translate(-50%,-100%) rotate(315deg)}
+.head.white i{background:radial-gradient(circle at 50% 25%,#fff,#f8eaff 65%,#bbb1ff);box-shadow:0 0 13px #fff,0 0 30px #ffb8ffb8}
+.head.pink i{background:linear-gradient(#ff65aa,#e71970);box-shadow:0 0 12px #ff4e9d,0 0 28px #ff2d9199}
+.head b{
+  position:absolute;left:50%;top:50%;width:22px;height:22px;transform:translate(-50%,-50%);
+  border-radius:50%;background:#fff5c5;box-shadow:0 0 13px #fff,0 0 27px #ffd66c;z-index:4
+}
+
+.flower1{left:2%;height:55%}.flower2{left:13%;height:71%}
+.flower3{left:28%;height:87%}.flower4{left:42%;height:66%}
+.flower5{left:56%;height:83%}.flower6{left:71%;height:65%}.flower7{left:85%;height:56%}
+
+.grass{
+  position:absolute;bottom:0;width:7px;height:22%;border-radius:100% 0;
+  background:#38df4b;box-shadow:0 0 9px #45ff5577;transform-origin:bottom
+}
+.g1{left:8%;transform:rotate(20deg)}.g2{left:22%;height:30%;transform:rotate(-20deg)}
+.g3{left:38%;height:24%;transform:rotate(15deg)}.g4{left:52%;height:31%;transform:rotate(-15deg)}
+.g5{left:67%;height:25%;transform:rotate(20deg)}.g6{left:81%;height:29%;transform:rotate(-18deg)}
+
+.love-message{
+  position:absolute;bottom:2.5vh;left:0;right:0;text-align:center;
+  opacity:0;transform:translateY(25px);transition:1.5s;z-index:10
+}
+.love-message.show{opacity:1;transform:translateY(0)}
+.line{width:80px;height:1px;background:#ff9bd5;margin:0 auto 8px;box-shadow:0 0 10px #ff66bb}
+.love-text{font-size:clamp(12px,2.5vw,17px);letter-spacing:.08em;color:#ffe7f6;text-shadow:0 0 10px #ff70c6}
+.big-heart{font-size:30px;color:#ff4c9d;text-shadow:0 0 10px #ff4c9d,0 0 25px #ff1c83;animation:beat 1.15s infinite}
+.small-text{font-size:10px;opacity:.55;letter-spacing:.18em;margin-top:2px}
+
+.spark{
+  position:fixed;width:4px;height:4px;border-radius:50%;background:#fff;
+  box-shadow:0 0 8px #fff,0 0 17px #ff82df;z-index:20;pointer-events:none;
+  animation:floatUp linear forwards
+}
+.firefly{
+  position:fixed;width:4px;height:4px;border-radius:50%;background:#d9ff86;
+  box-shadow:0 0 8px #d9ff86,0 0 20px #73ff72;z-index:1;
+  animation:fly 5s ease-in-out infinite alternate
+}
+.heart{
+  position:fixed;z-index:30;color:#ff4d9d;font-size:18px;pointer-events:none;
+  text-shadow:0 0 12px #ff4d9d;animation:heartUp 2.8s ease-out forwards
+}
+
+@keyframes grow{0%{transform:scaleY(0)}100%{transform:scaleY(1)}}
+@keyframes sway{0%,100%{rotate:-1.5deg}50%{rotate:1.8deg}}
+@keyframes beat{50%{transform:scale(1.3)}}
+@keyframes flicker{0%,18%,22%,63%,65%,100%{opacity:1}20%,64%{opacity:.65}}
+@keyframes floatUp{from{transform:translateY(0);opacity:0}15%{opacity:1}to{transform:translateY(-100vh);opacity:0}}
+@keyframes heartUp{from{transform:translateY(0) scale(.5);opacity:0}15%{opacity:1}to{transform:translateY(-220px) scale(1.3) rotate(25deg);opacity:0}}
+@keyframes fly{from{transform:translate(0,0)}to{transform:translate(50px,-80px)}}
+
+@media(max-width:600px){
+  #typing{font-size:23px;letter-spacing:.11em}
+  #openBtn{margin-top:27px;padding:11px 25px;font-size:14px}
+  .top-title{top:7vh;font-size:22px;letter-spacing:.08em}
+  .subtitle{top:12.5vh;font-size:9px}
+  .garden{height:59vh;min-height:340px}
+  .flower{width:60px}
+  .head{width:60px;height:60px}.head.big{width:75px;height:75px}
+  .head i{width:23px;height:39px}.head.big i{width:27px;height:47px}
+  .head b{width:16px;height:16px}
+  .stem{width:7px}.leaf{width:24px;height:12px}
+  .flower1{left:-4%}.flower2{left:10%}.flower3{left:25%}
+  .flower4{left:39%}.flower5{left:53%}.flower6{left:69%}.flower7{left:84%}
+}
